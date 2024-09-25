@@ -11,6 +11,7 @@
                 <th scope="col">Inizio</th>
                 <th scope="col">Fine</th>
                 <th scope="col">Categoria</th>
+                <th scope="col">Tecnologia</th>
                 <th scope="col">Azioni</th>
               </tr>
             </thead>
@@ -21,7 +22,17 @@
                             <td class="col-auto"> {{$project->title}} </td>
                             <td class="col-auto">{{($project->start_date)->format('d-m-Y')}}</td>
                             <td class="col-auto">{{($project->end_date)->format('d-m-Y')}}</td>
+                            {{-- categoria --}}
                             <td class="col-auto"><span class="badge text-bg-info">{{$project->type?->name}}</span></td>
+
+                            {{-- technology --}}
+                            <td class="col-auto">
+                                @forelse ($project->technologies as $technology)
+                                    <span class="badge text-bg-info">{{$technology->name}}</span>
+                                @empty
+                                    --
+                                @endforelse
+                            </td>
 
                             <td class="col-auto">
                                 <a class="btn btn-primary" href="{{route('admin.projects.show', $project)}}">
