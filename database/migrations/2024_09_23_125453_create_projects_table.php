@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->date('start_date');
-            $table->string('end_date')->default('In progress');
+            $table->date('end_date');
             $table->string('img');
             $table->string('slug');
             $table->text('description')->nullable();

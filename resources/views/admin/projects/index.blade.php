@@ -21,7 +21,7 @@
                             <td class="col-auto"> {{$project->id}}</td>
                             <td class="col-auto"> {{$project->title}} </td>
                             <td class="col-auto">{{($project->start_date)->format('d-m-Y')}}</td>
-                            <td class="col-auto">{{($project->end_date)->format('d-m-Y')}}</td>
+                            <td class="col-auto">@if(Carbon\Carbon::now()<=$project->end_date) In progress @else {{($project->end_date)->format('d-m-Y')}} @endif</td>
                             {{-- categoria --}}
                             <td class="col-auto"><span class="badge text-bg-info">{{$project->type?->name}}</span></td>
 
