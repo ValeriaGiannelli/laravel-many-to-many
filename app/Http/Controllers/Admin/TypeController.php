@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Type;
 use App\Functions\Helper;
+use App\http\Requests\TypeRequest;
 
 class TypeController extends Controller
 {
@@ -29,7 +30,7 @@ class TypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TypeRequest $request)
     {
         // prima di inserirla devo vedere se non esiste. Quando verifico l'esistenza di qualcosa è una query!!
         $exists = Type::where('name', $request->name)->first();
@@ -72,7 +73,7 @@ class TypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $type)
+    public function update(TypeRequest $request, Type $type)
     {
         $data = $request->all();
         $data['slug'] = Helper::generateSlug($data['name'], Type::class);
