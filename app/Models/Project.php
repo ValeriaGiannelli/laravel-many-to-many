@@ -32,7 +32,7 @@ class Project extends Model
 
 
     // funzione per relazione con tabella Pivor
-    public function technolgies(){
+    public function technologies(){
         return $this->belongsToMany(Technology::class);
     }
 }
