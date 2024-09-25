@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Functions\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Technology;
@@ -31,7 +32,20 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // verifichiamo che esista
+        $exists = Technology::where('name', $request->name)->first();
+
+        if(!$exists){
+            $data = $request->all();
+            $data['slug']=Helper::generateSlug($data['name'], Technology::class);
+
+            $technolgy = Technology::create($data);
+
+            return redirect()->route('admin.technologies.index');
+        } else {
+            return redirect()->route('admin.technologies.index')->with('duplicate', 'Attenzione! Elemento già presente in lista');
+        }
     }
 
     /**
