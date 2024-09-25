@@ -20,9 +20,19 @@
     <h1>{{$project->id}}# {{$project->title}}</h1>
     <img src="{{$project->img}}" alt="immagine di {{$project->title}}">
     <h3>Categoria: {{$project->type? $project->type->name : 'Nessuna Categoria'}}</h3>
+
+    @forelse ($project->technologies as $technology)
+        <span class="badge text-bg-info">{{$technology->name}}</span>
+    @empty
+        --
+    @endforelse
+
     <p>Descrizione: {{$project->description}}</p>
     <h3>Data di inizio: {{$project->start_date}}</h3>
 
+    <a class="btn btn-primary" href="{{route('admin.projects.index')}}">
+        indietro
+    </a>
 
 
 </div>
