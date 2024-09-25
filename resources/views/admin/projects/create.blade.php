@@ -64,6 +64,18 @@
             </select>
         </div>
 
+        {{-- chechbox per le tecnologie --}}
+        <label for="technologies" class="form-label">Tecnologie: (*)</label>
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            @foreach ($technologies as $technology)
+
+                <input type="checkbox" class="btn-check" id="tech-{{$technology->id}}" autocomplete="off">
+                <label class="btn btn-outline-primary" for="tech-{{$technology->id}}">{{$technology->name}}</label>
+
+            @endforeach
+
+        </div>
+
         <div class="col-12">
             <label for="description" class="form-label">Descrizione del progetto</label>
             <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descrizione del progetto">{{old('description')}}</textarea>
