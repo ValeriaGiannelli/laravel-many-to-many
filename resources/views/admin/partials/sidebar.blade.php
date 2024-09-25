@@ -13,6 +13,9 @@
             <li>
                 <a href="{{route('admin.types.index')}}"><i class="fa-solid fa-list me-2"></i>Gestione tipologie</a>
             </li>
+            <li>
+                <a href="{{route('admin.technologies.index')}}"><i class="fa-solid fa-list me-2"></i>Gestione tecnologie</a>
+            </li>
         </ul>
     </div>
 </div>
