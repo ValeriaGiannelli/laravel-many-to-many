@@ -41,7 +41,16 @@ class ProjectController extends Controller
         $data = $request->all();
         $data['slug'] = Helper::generateSlug($data['title'], Project::class);
 
+        // dd($data);
+
         $new_project = Project::create($data);
+
+
+        // se ho messo nuove technologies ci sarà una chiave in più:
+        if(array_key_exists('technologies', $data)){
+            $new_project->technologies()->attach($data['technologies']);
+        }
+
         return redirect()->route('admin.projects.show', $new_project);
 
     }
