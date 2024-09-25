@@ -4,6 +4,20 @@
 <div class="container my-5">
     <div class="table-responsive">
         <h1>Aggiungi/modifica le tipologie dei progetti</h1>
+
+        @if(session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('duplicate'))
+            <div class="alert alert-warning" role="alert">
+                {{ session('duplicate') }}
+            </div>
+        @endif
+
+
         <form action="{{route('admin.types.store')}}" method="POST">
             @csrf
             <input type="text" name="name">

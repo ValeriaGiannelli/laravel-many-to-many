@@ -31,13 +31,26 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        // dump($request->all());
-        $data['slug'] = Helper::generateSlug($data['name'], Type::class);
+        // prima di inserirla devo vedere se non esiste. Quando verifico l'esistenza di qualcosa è una query!!
+        $exists = Type::where('name', $request->name)->first();
 
-        $type = Type::create($data);
+        // se non esiste la inserisco
+        if(!$exists){
 
-        return redirect()->route('admin.types.index');
+            $data = $request->all();
+            // dump($request->all());
+            $data['slug'] = Helper::generateSlug($data['name'], Type::class);
+
+            $type = Type::create($data);
+
+            return redirect()->route('admin.types.index')->with('succes', 'Elemento aggiunto con successo');
+        } else {
+            // se esiste mando messaggio di errore.
+            return redirect()->route('admin.types.index')->with('duplicate', 'Attenzione! Elemento già presente nella lista');
+        }
+
+
+
     }
 
     /**
