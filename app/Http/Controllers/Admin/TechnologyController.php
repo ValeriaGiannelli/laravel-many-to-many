@@ -67,16 +67,25 @@ class TechnologyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Technology $technology)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Helper::generateSlug($data['name'], Technology::class);
+
+        $technology->update($data);
+
+        return redirect()->route('admin.technologies.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Technology $technolgy)
     {
-        //
+        $technolgy->delete();
+
+        return redirect()->route('admin.technologies.index');
+
     }
 }
