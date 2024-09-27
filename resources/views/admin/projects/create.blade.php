@@ -29,14 +29,7 @@
             @enderror
 
         </div>
-        <div class="col-md-6">
-            <label for="img" class="form-label">URL immagine(*)</label>
-            <input type="text" class="form-control @error('img') is-invalid @enderror" id="img" name="img" placeholder="Inserisci l'URL dell'immagine" value="{{old('img')}}">
 
-            @error('img')
-                <small class="text-danger"> {{$message}} </small>
-            @enderror
-        </div>
         <div class="col-md-6">
             <label for="start_date" class="form-label">Inizio del progetto (*)</label>
             <input type="text" class="form-control @error('start_date') is-invalid @enderror" id="start_date" name="start_date" placeholder="2024/07/31" value="{{old('start_date')}}">
@@ -70,6 +63,9 @@
             <label for="img_path" class="form-label">Immagine</label>
             <input type="file" name="img_path" id="img_path">
         </div>
+        @error('img_path')
+            <small class="text-danger"> {{$message}} </small>
+        @enderror
 
         {{-- chechbox per le tecnologie --}}
         <label for="technologies" class="form-label">Tecnologie: (*)</label>

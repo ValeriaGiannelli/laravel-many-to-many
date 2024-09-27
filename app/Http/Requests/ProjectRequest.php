@@ -25,7 +25,7 @@ class ProjectRequest extends FormRequest
             'title'=>'required|min:5|max:100',
             'start_date'=>'required|date',
             'end_date'=>'required',
-            'img'=>'required'
+            'img_path'=>'image|mimes:png,jpg|max:5120'
         ];
     }
 
@@ -38,7 +38,9 @@ class ProjectRequest extends FormRequest
             'start_date.required'=>'La data è un campo obbligatorio',
             'start_date.date'=>'La data deve essere del formato YYYY-mm-dd',
             'end_date.required'=>'La data è un campo obbligatorio',
-            'img.required'=>'L\'immagine è un campo obbligatorio',
+            'img_path.image'=>'Il file deve essere un\'immagine',
+            'img_path.mimes'=>'Il file deve essere un formato :values',
+            'img_path.max'=>'Il file non può superare i :max KB',
         ];
     }
 }
