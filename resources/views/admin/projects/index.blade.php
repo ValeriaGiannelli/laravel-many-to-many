@@ -2,11 +2,23 @@
 
 @section('content')
 <div class="container my-5">
+
+    {{-- search bar --}}
+    <form action="{{route('admin.projects.index')}}" method="GET">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" value="{{ request('search') }}">
+            <button class="btn" type="submit" class="form-control">Cerca</button>
+
+        </div>
+    </form>
+
+
     <div class="table-responsive">
         <table class="table">
             <thead>
               <tr>
                 <th scope="col">id</th>
+                <th scope="col">Immagine</th>
                 <th scope="col">Titolo</th>
                 <th scope="col">Inizio</th>
                 <th scope="col">Fine</th>

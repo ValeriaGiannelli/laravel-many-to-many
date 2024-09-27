@@ -18,7 +18,16 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('id', 'desc')->paginate(10);
+        // per barra di ricera
+        if(isset($_GET['search'])){
+            $projects = Project::where('title', 'LIKE', '%' . $_GET['search'] . '%')->paginate(10);
+            // per mantenere la search nelle altre pagine (mantiene nella URL il get)
+            $projects->append(request()->query());
+        } else {
+
+            $projects = Project::orderBy('id', 'desc')->paginate(10);
+        }
+
         $technologies = Technology::all();
 
         return view('admin.projects.index', compact('projects', 'technologies'));
