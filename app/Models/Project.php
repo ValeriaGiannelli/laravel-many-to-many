@@ -19,10 +19,11 @@ class Project extends Model
         'title',
         'start_date',
         'end_date',
-        'img',
         'slug',
         'description',
-        'type_id'
+        'type_id',
+        'img_path',
+        'img_original_name'
     ];
 
     // funzione per mettere in relazione Project con Type

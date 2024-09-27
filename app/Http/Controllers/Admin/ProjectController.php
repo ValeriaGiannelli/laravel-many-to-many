@@ -9,6 +9,7 @@ use App\Http\Requests\ProjectRequest;
 use App\Functions\Helper;
 use App\Models\Type;
 use App\Models\Technology;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -17,7 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('id', 'desc')->get();
+        $projects = Project::orderBy('id', 'desc')->paginate(10);
         $technologies = Technology::all();
 
         return view('admin.projects.index', compact('projects', 'technologies'));
@@ -42,6 +43,13 @@ class ProjectController extends Controller
         $data['slug'] = Helper::generateSlug($data['title'], Project::class);
 
         // dd($data);
+        if(array_key_exists('img_path', $data)){
+            $img_path = Storage::put('uploads', $data['img_path']);
+            $img_original_name = $request->file('img_path')->getClientOriginalName();
+            $data['img_path'] = $img_path;
+            $data['img_original_name'] = $img_original_name;
+
+        }
 
         $new_project = Project::create($data);
 
