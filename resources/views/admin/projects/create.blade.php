@@ -61,7 +61,7 @@
         {{-- caricamento img --}}
         <div class="col-12">
             <label for="img_path" class="form-label">Immagine</label>
-            <input type="file" name="img_path" id="img_path">
+            <input type="file" name="img_path" id="img_path" class="form-control">
         </div>
         @error('img_path')
             <small class="text-danger"> {{$message}} </small>
