@@ -18,7 +18,6 @@
     ])
 
     <h1>{{$project->id}}# {{$project->title}}</h1>
-    <img src="{{$project->img}}" alt="immagine di {{$project->title}}">
     <h3>Categoria: {{$project->type? $project->type->name : 'Nessuna Categoria'}}</h3>
 
     @forelse ($project->technologies as $technology)
@@ -30,8 +29,9 @@
     <p>Descrizione: {{$project->description}}</p>
     <h3>Data di inizio: {{$project->start_date}}</h3>
 
-    <div>
-        <img src="{{asset('storage/' . $project->img_path)}}" alt="{{ $project->img_original_name }}">
+    {{-- immagine --}}
+    <div class="col-auto">
+        <img class="img-show" src="{{asset('storage/' . $project->img_path)}}" alt="{{ $project->img_original_name }}" onerror="this.src='/img/no_img.jpg'">
     </div>
 
     <a class="btn btn-primary" href="{{route('admin.projects.index')}}">

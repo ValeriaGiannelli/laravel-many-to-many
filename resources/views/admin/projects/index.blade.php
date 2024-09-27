@@ -19,6 +19,10 @@
                 @foreach ( $projects as $project )
                     <tr>
                             <td class="col-auto"> {{$project->id}}</td>
+                            {{-- immagine --}}
+                            <td class="col-auto">
+                                <img class="thumb-mini" src="{{asset('storage/' . $project->img_path)}}" alt="{{ $project->img_original_name }}" onerror="this.src='/img/no_img.jpg'">
+                            </td>
                             <td class="col-auto"> {{$project->title}} </td>
                             <td class="col-auto">{{($project->start_date)->format('d-m-Y')}}</td>
                             <td class="col-auto">@if(Carbon\Carbon::now()<=$project->end_date) In progress @else {{($project->end_date)->format('d-m-Y')}} @endif</td>
