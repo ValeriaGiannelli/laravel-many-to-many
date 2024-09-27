@@ -24,7 +24,6 @@ class ProjectsTableSeeder extends Seeder
             $new_project->title = $faker->sentence();
             $new_project->start_date = $faker->dateTimeBetween('-1 month', 'now');
             $new_project->end_date = $faker->dateTimeBetween('now', '1 year');
-            $new_project->img = $faker->word();
             $new_project->slug = Helper::generateSlug($new_project->title, Project::class);
             $new_project->description = $faker->sentence();
             // dump($new_project);

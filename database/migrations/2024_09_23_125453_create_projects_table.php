@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('title', 100);
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('img');
+            $table->string('img_path')->nullable();
+            $table->string('img_original_name')->nullable();
             $table->string('slug');
             $table->text('description')->nullable();
             $table->timestamps();
