@@ -18,7 +18,7 @@
 
     @endif
 
-    <form class="row g-3" action="{{route('admin.projects.update', $project)}}" method="POST">
+    <form class="row g-3" action="{{route('admin.projects.update', $project)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="col-md-6">
@@ -30,14 +30,7 @@
             @enderror
 
         </div>
-        <div class="col-md-6">
-            <label for="img" class="form-label">URL immagine(*)</label>
-            <input type="text" class="form-control @error('img') is-invalid @enderror" id="img" name="img" placeholder="Inserisci l'URL dell'immagine" value="{{old('img', $project->img)}}">
 
-            @error('img')
-                <small class="text-danger"> {{$message}} </small>
-            @enderror
-        </div>
         <div class="col-md-6">
             <label for="start_date" class="form-label">Inizio del progetto (*)</label>
             <input type="text" class="form-control @error('start_date') is-invalid @enderror" id="start_date" name="start_date" placeholder="2024/07/31" value="{{old('start_date', ($project->start_date)->format('Y-m-d'))}}">
@@ -64,6 +57,16 @@
                     <option value="{{$type->id}}" @if(old('type_id', $project->type?->id) == $type->id) selected @endif>{{$type->name}}</option>
                 @endforeach
             </select>
+        </div>
+
+        {{-- caricamento img --}}
+        <div class="col-12">
+            <label for="img_path" class="form-label">Immagine</label>
+            <input type="file" name="img_path" id="img_path" class="form-control">
+
+            @error('img_path')
+                <small class="text-danger"> {{$message}} </small>
+            @enderror
         </div>
 
         {{-- chechbox per le tecnologie --}}

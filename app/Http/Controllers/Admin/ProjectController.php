@@ -91,8 +91,18 @@ class ProjectController extends Controller
             $data['slug'] = Helper::generateSlug($data['title'], Project::class);
         }
 
+        // se siste l'array delle immagini
+        if(array_key_exists('img_path', $data)){
+            $img_path = Storage::put('uploads', $data['img_path']);
+            $img_original_name = $request->file('img_path')->getClientOriginalName();
+            $data['img_path'] = $img_path;
+            $data['img_original_name'] = $img_original_name;
+
+        }
+
         $project->update($data);
 
+        // se esiste l'array delle tecnologie
         if(array_key_exists('technologies', $data)){
             // devo aggiornare la relazione
             $project->technologies()->sync($data['technologies']);
@@ -100,6 +110,7 @@ class ProjectController extends Controller
             // se non c'è la chiave tolgo la relazione con la tabella technologies
             $project->technologies()->detach();
         }
+
 
         return redirect()->route('admin.projects.show', $project)->with('edit', 'Modificato con successo');
     }
