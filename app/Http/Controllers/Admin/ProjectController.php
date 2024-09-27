@@ -28,13 +28,14 @@ class ProjectController extends Controller
             $projects = Project::orderBy('id', 'desc')->paginate(10);
         }
 
-        // per ordinamento in colonne
+        // questo cambia tra asc e desc quando clicco sul link
         if(isset($_GET['direction'])){
             $direction = $_GET['direction'] === 'asc' ? 'desc' : 'asc';
         } else {
             $direction = 'desc';
         }
 
+        // questo fa l'order della visualizzazione
         if(isset($_GET['column'])){
             $column = $_GET['column'];
             $projects = Project::orderBy($column, $direction) -> paginate(10);
