@@ -61,7 +61,10 @@
         {{-- caricamento img --}}
         <div class="col-12">
             <label for="img_path" class="form-label">Immagine</label>
-            <input type="file" name="img_path" id="img_path" class="form-control">
+            <input type="file" name="img_path" id="img_path" class="form-control" onchange="showImg(event)">
+
+            {{-- anteprima dell'immagine caricata --}}
+            <img src="/img/no_img.jpg" class="thumb-mini" id="thumb">
         </div>
         @error('img_path')
             <small class="text-danger"> {{$message}} </small>
@@ -93,5 +96,14 @@
         </div>
       </form>
 </div>
+
+{{-- funzioni --}}
+<script>
+    // funzione che cambia l'anteprima del file caricato
+    function showImg(event){
+        const thumb = document.getElementById('thumb');
+        thumb.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
 
 @endsection
