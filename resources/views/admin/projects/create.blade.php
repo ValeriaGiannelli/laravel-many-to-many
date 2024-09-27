@@ -18,7 +18,7 @@
 
     @endif
 
-    <form class="row g-3" action="{{route('admin.projects.store')}}" method="POST">
+    <form class="row g-3" action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
           <label for="title" class="form-label">Titolo del progetto (*)</label>
@@ -62,6 +62,13 @@
                     <option value="{{$type->id}}" @if(old('type_id') == $type->id) selected @endif>{{$type->name}}</option>
                 @endforeach
             </select>
+        </div>
+
+
+        {{-- caricamento img --}}
+        <div class="col-12">
+            <label for="img_path" class="form-label">Immagine</label>
+            <input type="file" name="img_path" id="img_path">
         </div>
 
         {{-- chechbox per le tecnologie --}}

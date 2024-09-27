@@ -30,6 +30,10 @@
     <p>Descrizione: {{$project->description}}</p>
     <h3>Data di inizio: {{$project->start_date}}</h3>
 
+    <div>
+        <img src="{{asset('storage/' . $project->img_path)}}" alt="{{ $project->img_original_name }}">
+    </div>
+
     <a class="btn btn-primary" href="{{route('admin.projects.index')}}">
         indietro
     </a>
