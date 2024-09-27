@@ -28,9 +28,23 @@ class ProjectController extends Controller
             $projects = Project::orderBy('id', 'desc')->paginate(10);
         }
 
+        // per ordinamento in colonne
+        if(isset($_GET['direction'])){
+            $direction = $_GET['direction'] === 'asc' ? 'desc' : 'asc';
+        } else {
+            $direction = 'desc';
+        }
+
+        if(isset($_GET['column'])){
+            $column = $_GET['column'];
+            $projects = Project::orderBy($column, $direction) -> paginate(10);
+        } else {
+            $projects = Project::orderBy('id', 'desc')->paginate(10);
+        }
+
         $technologies = Technology::all();
 
-        return view('admin.projects.index', compact('projects', 'technologies'));
+        return view('admin.projects.index', compact('projects', 'technologies', 'direction'));
     }
 
     /**

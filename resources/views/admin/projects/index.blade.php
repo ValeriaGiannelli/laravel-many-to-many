@@ -17,9 +17,13 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">id</th>
+                <th scope="col">
+                    <a href="{{route('admin.projects.index', ['direction'=> $direction, 'column'  => 'id'])}}">id</a>
+                </th>
                 <th scope="col">Immagine</th>
-                <th scope="col">Titolo</th>
+                <th scope="col">
+                    <a href="{{route('admin.projects.index', ['direction'=> $direction, 'column'  => 'title'])}}">Titolo</a>
+                </th>
                 <th scope="col">Inizio</th>
                 <th scope="col">Fine</th>
                 <th scope="col">Categoria</th>
