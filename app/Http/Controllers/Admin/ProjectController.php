@@ -93,6 +93,12 @@ class ProjectController extends Controller
 
         // se siste l'array delle immagini
         if(array_key_exists('img_path', $data)){
+
+            // cancella la relazione precedente con l'immagine se esiste
+            if($project->img_path){
+                Storage::delete($project->img_path);
+            }
+
             $img_path = Storage::put('uploads', $data['img_path']);
             $img_original_name = $request->file('img_path')->getClientOriginalName();
             $data['img_path'] = $img_path;
@@ -120,6 +126,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // se il post ha l'immagine cacellala dallo storage
+        if($project->img_path){
+            Storage::delete($project->img_path);
+        }
+
         $project->delete();
         return redirect()->route('admin.projects.index');
     }
